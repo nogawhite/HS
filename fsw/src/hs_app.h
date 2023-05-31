@@ -115,6 +115,12 @@ typedef struct
 
     uint32 RunStatus; /**< \brief HS App run status */
 
+    uint32 SysMonPspModuleId;  /**< \brief PSP module to track system health, cpu utilization */
+    uint16 SysMonSubsystemId;  /**< \brief Subsystem ID for cpu utilization function */
+    uint16 SysMonSubchannelId; /**< \brief Subchannel ID for cpu utilization function */
+
+    uint32 UtilizationCycleCounter; /**< \brief Counter to run cpu utilization check */
+
     uint32 CurrentCPUHoggingTime; /**< \brief Count of cycles that CPU utilization is above hogging threshold */
     uint32 MaxCPUHoggingTime;     /**< \brief Count of hogging cycles after which an event reports hogging */
     uint32 CurrentCPUUtilIndex;   /**< \brief Current index into the Utilization Tracker */
@@ -177,7 +183,7 @@ void HS_AppMain(void);
  *  \return Execution status, see \ref CFEReturnCodes
  *  \retval #CFE_SUCCESS \copybrief CFE_SUCCESS
  */
-int32 HS_AppInit(void);
+CFE_Status_t HS_AppInit(void);
 
 /**
  * \brief Initialize Software Bus
@@ -192,7 +198,7 @@ int32 HS_AppInit(void);
  *  \return Execution status, see \ref CFEReturnCodes
  *  \retval #CFE_SUCCESS \copybrief CFE_SUCCESS
  */
-int32 HS_SbInit(void);
+CFE_Status_t HS_SbInit(void);
 
 /**
  * \brief Initialize cFE Table Services
@@ -207,7 +213,7 @@ int32 HS_SbInit(void);
  *  \return Execution status, see \ref CFEReturnCodes
  *  \retval #CFE_SUCCESS \copybrief CFE_SUCCESS
  */
-int32 HS_TblInit(void);
+CFE_Status_t HS_TblInit(void);
 
 /**
  * \brief Perform Normal Periodic Processing
@@ -224,7 +230,7 @@ int32 HS_TblInit(void);
  *  \return Execution status, see \ref CFEReturnCodes
  *  \retval #CFE_SUCCESS \copybrief CFE_SUCCESS
  */
-int32 HS_ProcessMain(void);
+CFE_Status_t HS_ProcessMain(void);
 
 /**
  * \brief Process commands received from cFE Software Bus
@@ -239,6 +245,6 @@ int32 HS_ProcessMain(void);
  *  \return Execution status, see \ref CFEReturnCodes
  *  \retval #CFE_SUCCESS \copybrief CFE_SUCCESS
  */
-int32 HS_ProcessCommands(void);
+CFE_Status_t HS_ProcessCommands(void);
 
 #endif

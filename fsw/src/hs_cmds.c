@@ -27,10 +27,9 @@
 *************************************************************************/
 #include "hs_app.h"
 #include "hs_cmds.h"
-#include "hs_custom_internal.h"
 #include "hs_monitors.h"
 #include "hs_msgids.h"
-#include "hs_events.h"
+#include "hs_eventids.h"
 #include "hs_utils.h"
 #include "hs_version.h"
 
@@ -305,7 +304,7 @@ void HS_EnableEventMonCmd(const CFE_SB_Buffer_t *BufPtr)
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 void HS_DisableEventMonCmd(const CFE_SB_Buffer_t *BufPtr)
 {
-    int32 Status = CFE_SUCCESS;
+    CFE_Status_t Status = CFE_SUCCESS;
 
     /*
     ** Unsubscribe from Event Messages if currently enabled
@@ -431,7 +430,7 @@ void HS_SetMaxResetsCmd(const CFE_SB_Buffer_t *BufPtr)
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 void HS_AcquirePointers(void)
 {
-    int32 Status;
+    CFE_Status_t Status;
 
     /*
     ** Release the table (AppMon)
@@ -659,8 +658,8 @@ void HS_AppMonStatusRefresh(void)
         else
         {
             HS_AppData.AppMonCheckInCountdown[TableIndex] = HS_AppData.AMTablePtr[TableIndex].CycleCount;
-            CFE_SET((HS_AppData.AppMonEnables[TableIndex / HS_BITS_PER_APPMON_ENABLE]),
-                    (TableIndex % HS_BITS_PER_APPMON_ENABLE));
+            HS_AppData.AppMonEnables[TableIndex / HS_BITS_PER_APPMON_ENABLE] |=
+                (1 << (TableIndex % HS_BITS_PER_APPMON_ENABLE));
         }
     }
 }

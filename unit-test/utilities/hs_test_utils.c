@@ -32,10 +32,9 @@
 #include "hs_tbl.h"
 #include "hs_msgdefs.h"
 #include "hs_version.h"
-#include "hs_events.h"
+#include "hs_eventids.h"
 #include "hs_utils.h"
 #include "hs_cmds.h"
-#include "hs_custom.h"
 #include "hs_monitors.h"
 #include "hs_msg.h"
 
@@ -108,7 +107,6 @@ void HS_Test_Setup(void)
     UT_ResetState(0);
 
     memset(&HS_AppData, 0, sizeof(HS_AppData));
-    memset(&HS_CustomData, 0, sizeof(HS_CustomData));
     memset(context_CFE_EVS_SendEvent, 0, sizeof(context_CFE_EVS_SendEvent));
     memset(&context_CFE_ES_WriteToSysLog, 0, sizeof(context_CFE_ES_WriteToSysLog));
     memset(&UT_CmdBuf, 0, sizeof(UT_CmdBuf));
